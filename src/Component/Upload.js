@@ -16,7 +16,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 var selectedFileName = null;
 var fileName = "Choose Files";
 
-const port = process.env.PORT || 'http://localhost:8000/';
+const port = 'https://safe-plateau-56340.herokuapp.com/';
 
 const StyledTableCell = withStyles(theme => ({
     head: {

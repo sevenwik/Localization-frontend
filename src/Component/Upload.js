@@ -78,6 +78,10 @@ export default class Upload extends React.Component{
         })
         const filename = data.language;
         delete data['language']
+        if(this.state.id!=null && this.state.value!=null)
+        {
+          data[this.state.id] = this.state.value;
+        }
         const json_data = JSON.stringify(data);
         const blob = new Blob([json_data], { type: 'application/json' });
         const href = URL.createObjectURL(blob);
@@ -89,18 +93,24 @@ export default class Upload extends React.Component{
         document.body.removeChild(link);
     
       }
+      changeText(e)
+      {
+        this.setState({id:e.target.id});
+        this.setState({value:e.target.value});
+       
+      }
     renderTableData(){
         return this.state.data.map((applicant,index)=>{
           const {language,application,applicant_details,applicant_name,aadhar_number,mobile_number,email} = applicant;
           return(
             <StyledTableRow key={language}>
               <td>{language}</td>
-              <StyledTableCell>{application}</StyledTableCell>
-              <StyledTableCell>{applicant_details}</StyledTableCell>
-              <StyledTableCell>{applicant_name}</StyledTableCell>
-              <StyledTableCell>{aadhar_number}</StyledTableCell>
-              <StyledTableCell>{mobile_number}</StyledTableCell>
-              <StyledTableCell>{email}</StyledTableCell>
+              <StyledTableCell><input type="text" value={application} id="application" onChange={(e)=>{this.changeText(e)}}/></StyledTableCell>
+              <StyledTableCell><input type="text" value={applicant_details} id="applicant_details" onChange={(e)=>{this.changeText(e)}}/></StyledTableCell>
+              <StyledTableCell><input type="text" value={applicant_name} id="applicant_name" onChange={(e)=>{this.changeText(e)}}/></StyledTableCell>
+              <StyledTableCell><input type="text" value={aadhar_number} id="aadhar_number" onChange={(e)=>{this.changeText(e)}}/></StyledTableCell>
+              <StyledTableCell><input type="text" value={mobile_number} id="mobile_number" onChange={(e)=>{this.changeText(e)}}/></StyledTableCell>
+              <StyledTableCell><input type="text" value={email} id ="email" onChange={(e)=>{this.changeText(e)}}/></StyledTableCell>
               <StyledTableCell><Button variant="dark" value={language} id={language} key={language} onClick={(e)=>{this.onDownload(e)}}>Download</Button></StyledTableCell>
             </StyledTableRow>
           )
